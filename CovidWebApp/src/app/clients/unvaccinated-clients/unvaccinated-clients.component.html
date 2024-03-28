@@ -1,0 +1,10 @@
+<h2>Unvaccinated Clients</h2>
+
+<p>Total Unvaccinated Clients: {{ unvaccinatedClients.length }}</p>
+
+<ul class="unvaccinated-list">
+  <li *ngFor="let client of unvaccinatedClients" class="client-item">
+    <span>{{ client.firstName }} {{ client.lastName }}</span>
+    <span>{{ client.mobileNumber }}</span>
+  </li>
+</ul>

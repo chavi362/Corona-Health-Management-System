@@ -1,0 +1,99 @@
+<h2>{{isNew? 'Add Patient': 'Patient Details'}}</h2>
+
+<form [formGroup]="patientsForm" novalidate *ngIf="patientsForm">
+    <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input type="text" class="form-control" id="firstName" placeholder="Enter First Name"
+            formControlName="firstName">
+        <small class="error" *ngIf="patientsForm.controls['firstName'].errors?.['required']">Required</small>
+    </div>
+    <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input type="text" class="form-control" id="lastName" placeholder="Enter Last Name" formControlName="lastName">
+        <small class="error" *ngIf="patientsForm.controls['lastName'].errors?.['required']">Required</small>
+    </div>
+    <div class="form-group">
+        <label for="identity">Identity</label>
+        <input type="text" class="form-control" id="identity" placeholder="Enter Identity" formControlName="identity">
+        <small class="error" *ngIf="patientsForm.controls['identity'].errors?.['required']">Required</small>
+        <small class="error" *ngIf="patientsForm.controls['identity'].errors?.['identity']">Identity is invalid</small>
+    </div>
+    <div class="form-group">
+        <label for="city">City</label>
+        <input type="text" class="form-control" id="city" placeholder="Enter City" formControlName="city">
+        <small class="error" *ngIf="patientsForm.controls['city'].errors?.['required']">Required</small>
+    </div>
+    <div class="form-group">
+        <label for="street">Street</label>
+        <input type="text" class="form-control" id="street" placeholder="Enter Street" formControlName="street">
+        <small class="error" *ngIf="patientsForm.controls['street'].errors?.['required']">Required</small>
+    </div>
+    <div class="form-group">
+        <label for="buildingNumber">Building Number</label>
+        <input type="text" class="form-control" id="buildingNumber" placeholder="Enter Building Number"
+            formControlName="buildingNumber">
+        <small class="error" *ngIf="patientsForm.controls['buildingNumber'].errors?.['required']">Required</small>
+    </div>
+    <div class="form-group">
+        <label for="phoneNumber">Phone Number</label>
+        <input type="text" class="form-control" id="phoneNumber" placeholder="Enter Phone Number"
+            formControlName="phoneNumber">
+    </div>
+    <div class="form-group">
+        <label for="mobileNumber">Mobile Number</label>
+        <input type="text" class="form-control" id="mobileNumber" placeholder="Enter Mobile Number"
+            formControlName="mobileNumber">
+        <small class="error" *ngIf="patientsForm.controls['mobileNumber'].errors?.['required']">Required</small>
+    </div>
+    <div class="form-group">
+        <label for="positiveResultDate">Positive Result Date</label>
+        <input type="date" class="form-control" id="positiveResultDate" placeholder="Enter Positive Result Date"
+            formControlName="positiveResultDate">
+    </div>
+    <div class="form-group">
+        <label for="recoveryDate">Recovery Date</label>
+        <input type="date" class="form-control" id="recoveryDate" placeholder="Recovery Date"
+            formControlName="recoveryDate">
+    </div>
+    <hr>
+    <h3> Vaccinations list:</h3>
+    <ng-container *ngIf="client?.vaccinationsClients?.length! < 4">
+
+        <form [formGroup]="vaccinationForm" novalidate>
+            <div class="form-group">
+                <label for="vaccinationDate">Vaccination Date</label>
+                <input type="date" class="form-control" id="vaccinationDate" placeholder="Vaccination Date"
+                    formControlName="vaccinationDate">
+                <small class="error"
+                    *ngIf="vaccinationForm.controls['vaccinationDate'].errors?.['required']">Required</small>
+            </div>
+            <div class="form-group">
+                <label for="creatorId">Creator</label>
+                <select class="form-control" id="creatorId" formControlName="creatorId">
+                    <option [value]="creator.creatorID" *ngFor="let creator of creators">{{creator.creatorName}}</option>
+                </select>
+                <small class="error" *ngIf="vaccinationForm.controls['creatorId'].errors?.['required']">Required</small>
+            </div>
+            <button type="submit" class="btn btn-sm btn-light" (click)="addVaccination()">Add Vaccination</button>
+        </form>
+    </ng-container>
+    <ng-container *ngIf="client?.vaccinationsClients?.length">
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>Creator Name</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let vaccination of client.vaccinationsClients">
+                    <td>{{vaccination.creator.creatorName}}</td>
+                    <td>{{vaccination.vaccinationDate}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </ng-container>
+
+    <button type="submit" class="btn btn-light" (click)="save()">Save</button>
+    <button type="submit" class="btn btn-light" (click)="back()">Back to List</button>
+</form>

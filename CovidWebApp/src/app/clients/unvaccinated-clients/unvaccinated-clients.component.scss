@@ -1,0 +1,25 @@
+
+.unvaccinated-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .client-item {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .client-item span {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .client-item span:first-child {
+    font-weight: bold;
+  }
+  
+  

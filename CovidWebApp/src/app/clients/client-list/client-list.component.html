@@ -1,0 +1,44 @@
+<h1>Patients List</h1>
+<a href="http://localhost:4200/clients/unvaccinated">View Unvaccinated Clients</a>
+<button type="submit" class="btn btn-info" (click)="addOrUpdate()">Add Patient</button>
+<table class="table table-hover table-bordered table-scroll">
+    <thead>
+        <tr>
+            <th>Edit</th>
+            <th>Delete</th>
+            <th>Patients ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Identity</th>
+            <th>City</th>
+            <th>Street</th>
+            <th>Building Number</th>
+            <th>Phone Number</th>
+            <th>Mobile Number</th>
+            <th>Positive Result Date</th>
+            <th>Recovery Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngIf="error">
+            <td colspan="4">An error occurred, please try again later...</td>
+        </tr>
+        <tr *ngFor="let client of clients">
+            <td> <button class="btn btn-sm btn-light" (click)="addOrUpdate(client.clientId)"><i
+                        class="bi bi-window-stack"></i></button></td>
+            <td> <button class="btn btn-sm btn-light" (click)="delete(client.clientId)"><i
+                        class="bi bi-x-circle"></i></button></td>
+            <td> {{ client.clientId }}</td>
+            <td> {{ client.firstName }}</td>
+            <td> {{ client.lastName }}</td>
+            <td> {{ client.identity }}</td>
+            <td> {{ client.city }}</td>
+            <td> {{ client.street }}</td>
+            <td> {{ client.buildingNumber }}</td>
+            <td> {{ client.phoneNumber }}</td>
+            <td> {{ client.mobileNumber }}</td>
+            <td> {{ client.positiveResultDate | date :'dd/MM/yyyy'}}</td>
+            <td> {{ client.recoveryDate | date :'dd/MM/yyyy'}}</td>
+        </tr>
+    </tbody>
+</table>
